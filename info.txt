@@ -1,0 +1,345 @@
+Projeto para "Criação de Gerenciador de Tarefas"
+
+##### Introdução #####
+- O React é uma biblioteca usada para criar interfaces de usuário interativas.
+- Desenvolvida pelo Facebook (Meta).
+- Aprende uma vez, use em qualquer lugar.
+  - iOS & Android (React Native) & Desktop (Electron).
+- É a tecnologia mais demandada pelo mercado atualmente (e isso já há vários anos).
+  - É praticamente o padrão da indústria quando o assunto é criação de aplicações web.
+  - Sai muito na frente de seus concorrentes (Vue e Angular). Mais presença no mercado, mais pessoas programando.
+- É utilizado por empresas multibilionárias, como, Facebook, Instagram, Netflix, AirBnB, LinkedIn, Spotify.
+
+
+##### Componentes #####
+- No React, dividimos a aplicação em pequenos componentes.
+- Vários componentes, quando combinados, formam grandes estruturas.
+- Pense neles como se fossem peças de LEGO.
+- Usamos JSX para escrevê-los.
+- Componente é uma função JavaScript que retorna um "HTML", que na verdade é um JSX, que é um HTML misturado com JavaScript.
+
+
+##### Preparando o ambiente de desenvolvimento #####
+### Instalar o Node.js
+- Precisa instalar porque é uma ferramenta que permite execução de código JavaScript fora do navegador, e é preciso para criação de projetos React.
+- Quando é instalado, ele também trás o NPM, que significa Node Package Manager, que é um gerenciador de bibliotecas para o node.
+- Uma biblioteca é uma extensão que pode ser usada na projeto. Se você precisa de algo, ao invés de criar do zero, pode existir uma biblioteca que já faça, sendo necessário apenas importá-la.
+- O próprio React é uma biblioteca.
+
+### Instalar o VSCode
+- Editor de código mais usado atualmente.
+- Adicionar as extensões: 
+  - Tailwind CSS IntelliSense.
+  - Prettier - Code formatter.
+    - Depois de instalar, vai em Settings, e: 
+	  - Procura por "Format On Save", e marque a opção.
+	  - Procura por "Default Formatter", e selecione a opção "Prettier - Code formatter".
+  - ESLint.
+  - Tema, escolha o seu, algumas opções: "Dracula Theme Official", "Material Theme", ou "Nord".
+
+### Abrir um novo Terminal (ctrl + j) ou Terminal - New Terminal, e digite o comando para verificar a versão do node:
+node -v
+
+
+##### Inicializando o projeto com o Vite #####
+- Clique em open folder, selecione o diretório, e crie a pasta "curso-de-react".
+- Para inicializar o projeto React, utilizaremos uma ferramenta chamada "vite". Ela facilita a criação de um projeto React.
+
+- Abrir o terminal e digitar o comando abaixo para criar seu projeto react dentro do diretório selecionado, utilizaremos a versão abaixo para não ter problemas com compatibilidade: 
+  - npm create vite@5.5.2 .
+  - select React
+  - select JavaScript
+    -> irá criar alguns arquivos dentro da pasta.
+  - npm install
+    -> irá instalar todos os pacotes que o projeto preciso para rodar.
+  - npm run dev
+    -> para inicializar o projeto.
+
+NOTES: If the command was blocked by internal policies. Run PowerShell as administrator e run the command below:
+  - Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+  - Select A
+
+### Entendendo a estrutura de pastas do projeto
+- package.json
+  - Arquivo padrão em qualquer projeto Node. Arquivo de configuração do nosso projeto.
+  - Um projeto React é um projeto Node.
+  - scripts: 
+    - dev: Acabamos de rodar, inicializa nosso servidor. 
+	- build: Faz o build do projeto, para quando formos colocar em produção.
+  - dependencies: Tudo que o projeto precisa para rodar, por exemplo, react e react-dom.
+    *** Importante que as versões das dependencias. sejam as mesmas que o instrutor, se rodou o vite com a versão mencionada, será igual. Para evitar problemas de compatibilidade.
+
+- index.html
+  - HTML que é exibido quando inicio a aplicação.
+  - React gera uma SPA (Single Page Application), conteúdo inserido por meio de JavaScript (React). Ou seja, o React que inseri o conteúdo dentro da página Index.
+  - Vantagens de SPAs: 
+    - Velocidade: navegação entre páginas é muito mais rápido, pois não exige chamadas para um servidor.
+	- Experiência do usuário: SPAs são altamente interativas e performáticas.
+
+# Componentes na prática
+- src/main.jsx
+  - imports:
+    - Importa algo de alguma biblioteca para seu projeto, ou algo do seu próprio projeto, como por exemplo o App.jsx.
+  - createRoot:
+    - Chama ele passando um document.getElementById('root') para renderizar a aplicação react para ser chamada dentro da div root que está no index.html. Ou seja, a inserção de conteúdo de uma SPA em uma aplicação React acontece por meio desse código: 
+	  createRoot(document.getElementById('root')).render(
+        <StrictMode>
+          <App />
+        </StrictMode>,
+      )
+	- Quando um componente é renderizado, a primeira letra precisa "sempre" estar em maiúsculo. Exemplo: 
+	  <App />
+
+
+##### Criando o nosso primeiro componente #####
+- src/App.jsx
+  - Apague tudo. Conforme falado anteriormente, um componente é uma função. Então, vamos escrever a primeira função. Arquivo src/App.jsx utilizado para alguns testes para escrever a primeira função.
+  - Return pode apenas retornar um único elemento que fique em volta de todos os outros. Por exemplo, pode haver apenas uma div com varios outros elementos dentro dessa div, se tentar ter mais do que uma div, vai dar erro.
+  - Para usar JavaScript dentro do return, "sempre" utilize chaves {}.
+  
+  # Como funciona o JSX?
+    - Ele vai juntar tudo que foi retornado (no return) para poder montar/agregar a página onde o componente for chamado.
+  
+  # O que é State (Estado)?
+    - Uma variável que quando alterada no React, faz com que o componente seja renderizado novamente, atualizando seu estado.
+	- Em poucas palavras, quando o state muda, a interface (tela) é atualizada.
+	- Será útil quando querer fazer algo em resposta a interação do usuário.
+	- "Conceito fundamental do React". React significa reagir. Com o State é possível reagir a interação do usuário.
+	- Última forma do arquivo src/App.jsx após iniciarmos o desenvolvimento do projeto: 
+	  import { useState } from "react";
+
+      function App() {
+        const [message, setMessage] = useState("Hello, World!"); // ### STATE
+      
+        return (
+          <div className="App">
+            <h1>{message}</h1>                       // ### STATE
+            <button
+              onClick={() => {
+                setMessage("Hello, I was Clicked!"); // ### STATE
+              }}
+            >
+              Change message
+            </button>
+          </div>
+        );
+      }
+      
+      export default App;
+
+
+##### Criando novos componente #####
+- Na pasta src, clicar com o botão direito e adicionar uma nova pasta chamada "components".
+- Dentro da pasta src/components, clicar com o botão direito e adicionar um new file com o nome "Tasks.jsx"
+  - A extensão "jsx" é o que informa ao VSCode que esse arquivo é um componente React. Isso facilita na questão de ícone e visualização do arquivo no projeto.
+  - Consultar código no arquivo src/components/Tasks.jsx.
+  - No arquivo src/App.jsx apague o que foi desenvolvido até o momento mantendo apenas o function App() e vamos usar ele para importar o component Tasks.
+    - Dentro do return do function App(), basta apenas colocar dentro de uma div a chamada do componente "<Tasks />" que automaticamente o component Tasks será importado e renderizado no componente App. Consultar arquivo src/App.jsx.
+
+- Dentro da pasta src/components, clicar com o botão direito e adicionar um new file com o nome "AddTask.jsx"
+  - Utilizamos sempre "CamelCase" para nomear nossos componentes, sendo a primeira letra maiúscula para cada palavra usada no componente.
+
+
+##### Conhecendo o Tailwind CSS #####
+- Antes de instalar e usar o Tailwind CSS aqui vai algumas dicas caso queira usar apenas css padrão do projeto.
+  - Quando o componente "App.jsx" foi criado, também foi criado o arquivo "App.css". Se preferir, pode usar o "App.css" para codificar o CSS e importar ele no próprio componente App com as classes que foram criadas.
+    - Para utilizar as classes, é necessário passar dentro do html className="Nome da Classe CSS".
+
+- Porém, o Tailwind CSS é muito melhor. Vamos instalar ele e utilizar no projeto.
+  - Link Instalação: https://v3.tailwindcss.com/docs/guides/vite
+  - Link Documentação para consultar classes: https://v3.tailwindcss.com/docs/installation
+  - Utilizar a mesma versão do curso.
+  - Abrir um novo terminal, na pasta do projeto, meu caso é "D:\GitHub\react\react\curso-de-react>" e digitar o comando: 
+    - npm install -D tailwindcss@3.4.10 postcss@8.4.41 autoprefixer@10.4.20
+  - Após instalar com sucesso, rodar o comando abaixo no terminal para iniciar o Tailwind CSS no projeto: 
+	  - npx tailwindcss init -p
+  - Alguns arquivos serão criados no projeto, entre eles o arquivo "D:\GitHub\react\react\curso-de-react\tailwind.config.js". Abrir esse arquivo e adicionar no content dele o que é recomendado no link acima. Consultar arquivo tailwind.config.js.
+  - Abrir o arquivo "src\index.css", apague tudo dentro dele e adicione as linhas abaixo: 
+    - @tailwind base;
+    - @tailwind components;
+    - @tailwind utilities;
+  - Pronto o setup do Tailwind CSS foi configurado.
+  - O Tailwind CSS é uma biblioteca que permite que a gente estilize os elementos usando classes utilizatárias.
+  - Agora vamos utilizar um pouco ele. No componente App vamos mudar a cor do nome Task Manager: 
+    - No arquivo "App.jsx". Adicionar a linha "<h1 className="text-red-500">Task Manager</h1>"
+	  - "className" utilizada para colocar classes.
+	  - "text-red-500" é uma classe do Tailwind CSS para dizer que ela o texto ficará vermelho. É importante ter a extensão do Tailwind CSS instalada para que as classes sejam reconhecidas no projeto facilitando o entendimento delas.
+	- Se alterar a linha para "<h1 className="text-red-500 text-3xl">Task Manager</h1>"
+	  - Além do que foi dito anteriormente, ele também irá aumentar o tamanho do texto por conta da outra classe "text-3xl"
+	- Iremos começar a adicionar as classes do Tailwind CSS no projeto, vou listar abaixo as classes e para que elas servem. Para o código, consultar arquivo src/App.jsx.
+	  - "w-screen h-screen" -> irá fazer com que a div cubra toda a largura e altura da tela.
+	  - "bg-slate-500" -> cor do background da tela cinza.
+	  - "flex" -> para a tela ter um display flex.
+	  - "justify-center" -> para centralizar horizontalmente.
+	  - "p-6" -> padding de 24px.
+	  
+	  - "w-[500px]" -> largura de 500px.
+	  - "text-slate-100" -> cor do texto para branco.
+	  - "font-bold" -> texto para negrito.
+	  - "text-center" -> centraliza o texto.
+	
+	  - "rounded-md" -> adiciona um border radius (borda arredondada) nos itens da lista.
+	  - "space-y-4" -> adiciona espaçamento vertical nos itens da lista, ou também para os elementos da tela.
+	  - "shadow" -> sombra.
+	  - "w-full" -> largura 100%.
+	  - "gap-2" -> espaçamento entre os botões do item da lista.
+	  - "text-left" -> alinha o texto para a esquerda.
+	  
+	  - "flex flex-col" -> para as colunas terem um display flex sendo uma abaixo da outra.
+	  - "border-slate-300" -> para dar coloração nas bordas da caixa de texto.
+	  - "outline-slate-400" -> para dar coloração diferente nas bordas da caixa de texto quando selecionadas.
+	  - "px-4" -> padding horizontal na caixa de texto.
+	  - "py-2" -> padding vertical na caixa de texto.
+	  - "text-white" -> texto na cor branca.
+	  - "font-medium" -> aumenta tamanho da fonte para médio.
+	  
+	  
+
+##### Props  #####
+- Vamos utilizar o estado de um componente em outro componente. Para isso usaremos "props".
+- Todo componente por padrão irá receber "props". Então nos componentes "Tasks.jsx" e "AddTask.jsx" iremos passar sempre props na sua chamada. Por exemplo: "function Tasks(props) { ..."
+- No componente "App.jsx" iremos chamar o componente "Tasks.jsx" passando o parametro props dentro dele, e nele iremos usar as props recebidas. Por exemplo: "<Tasks tasks={tasks} />".
+- Mais detalhes, consultar código dos componentes App e Tasks.jsx.
+
+
+##### Renderizando listas  #####
+- Vamos começcar a trabalhar no componente "Tasks.jsx". Onde será criado uma lista e iremos renderizar ela, passando dados do props para esse componente, e também adicionando algumas classes de Tailwind CSS.
+- Quando trabalha com uma lista usando "map", para cada elemento da lista, seja li, div ou outra coisa, é preciso passar uma "key". A "key" precisa ser unica entre os items. Por exemplo: "key={task.id}". O React usa isso internamente para questões de performance e também para saber qual item é qual.
+- Se perceber que está dando erros no props, isso ai tem a ver com o eslint, para fazer com que não de mais erros, abra o arquivo "eslint.config.js" e adiciona no rules isso aqui " "react/prop-types": "off", ".
+- Dessa forma já estamos renderizando o componente. Para mais detalhes consultar o código de "Tasks.jsx".
+
+
+##### Botão View Details  #####
+- No arquivo "Tasks.jsx", vamos adicionar dois botões, sendo um que seria o props do title dos itens da lista e o outro um ícone para ver os detalhes daquele item da lista.
+- Para adicionar ícones, vamos usar a biblioteca o "lucide".
+- Link lucide: https://lucide.dev/
+- Para instalar o "lucide", abrir o terminal na raiz do projeto e fazer o comando "npm install lucide-react@0.435.0". Obs: usar a mesma versão do curso para não dar conflitos.
+- No botão de View Details, vamos importar um ícone com o código "<ChevronRightIcon />", automaticamente será importado no começo do componente o ícone do lucide ->  "import { ChevronRightIcon } from "lucide-react";".
+
+
+##### Alternando uma tarefa para concluída + Função com props + Renderização condicional #####
+- Armazenamos um state task no componente principal "App.jsx".
+- Criamos uma função que atualiza o isCompleted de uma tarefa, ou seja, que altera o estado de conclusão de uma tarefa, e depois atualiza o state.
+- Passamos a função para o componente filho "Tasks.jsx" que renderiza as tarefas, de forma que quando clico em uma tarefa, a função "onTaskClick" é chamada e o estado de conclusão da tarefa clicada é atualizada.
+- Maiores detalhes consultar código dos arquivos "App.jsx" (function onTaskClick) e "Tasks.jsx" (onclick do primeiro button). 
+
+
+##### Apagando tarefas #####
+- Armazenamos um state task no componente principal "App.jsx".
+- Criamos uma função que deleta uma tarefa, ou seja, que altera o estado removendo a tarefa, e depois atualiza o state.
+- Passamos a função para o componente filho "Tasks.jsx" que renderiza as tarefas, de forma que quando clico em uma tarefa, a função "onDeleteTaskClick" é chamada e e a tarefa clicada é deletada.
+- Maiores detalhes consultar código dos arquivos "App.jsx" (function onDeleteTaskClick) e "Tasks.jsx" (onclick do button com TrashIcon). 
+- Observação: No componente filho é possível fazer um "destruct" das props. Ou seja, ao invés de passar o parâmetro props na function do componente Tasks, podemos substituir pelas functions que pretendendos receber, por exemplo: 
+  - DE: function Tasks(props) {
+  - PARA: function Tasks({tasks, onTaskClick, onDeleteTaskClick}) {
+  - Assim não é preciso passar props.tasks, e apenas tasks.
+
+
+##### Adicionando tarefas (Componente "AddTask.jsx") #####
+- Será criado duas caixas de texto e um botão.
+- A ideia é digitar o título da tarefa e também a descrição da tarefa.
+  - Fazer com que elas sejam agregadas a constante "tasks" para usar o novo state
+  - E fazer com que seja exibida no componente abaixo, que seria o "Tasks.jsx".
+  - Será preciso criar uma nova "function onAddTaskSubmit" no componente "App.jsx" para armazenar no state a nova tarefa.
+  - E também criar um novo state no componente "AddTask.jsx" para buscar os valores de título e descrição da nova tarefa digitada.
+- Maiores detalhes consultar o código dos arquivos "App.jsx" () e "AddTask.jsx".
+- Observação: Quando estã atualizando um estado, não pode fazer um "tasks.push(newTask);" porque isso não funciona. É preciso fazer "setTasks([...tasks, newTask])", assim a nova lista vai ter tudo que já tinha anteriormente "...tasks" e a nova tarefa "newTask".
+
+
+##### Adicionando validações na criação de uma tarefa #####
+- Se clicar em Add se preencher nada no title ou na description, irá adicionar da mesma forma. Vamos adicionar uma validação para contornar isso: 
+  - Quando adicionar nova tarefa, checar se os campos de title e descrição estão vazios ou se estão somente com espaços em branco, isso retornará uma validação.
+  - Adicionaremos também a biblioteca "uuid" para que seja gerado um novo id randomico para evitar erros entre os ids já existentes.
+    - Abrir o terminal e fazer o comando "npm install uuid@10.0.0".
+	- No componente "App.jsx": 
+	  - Importar "import { v4 } from "uuid";"
+	  - Na const "newTask" da "function onAddTaskSubmit" passar o valor do id dessa forma "id: v4(),"
+- Maiores detalhes consultar o código dos arquivos "App.jsx" () e "AddTask.jsx".	  
+
+
+##### Página de detalhes da tarefa com "React Router" #####
+- Link React Router: https://reactrouter.com/6.30.1/start/tutorial
+                     https://www.npmjs.com/package/react-router-dom
+					 No curso instalamos a que estava corrente que foi a versão 6.26.1, mas agora já está na 7.6.3.
+- Vamos implementar o botão detalhes, quando ele for clicado iremos para a página de detalhes.
+- E também voltaremos da página de detalhes para a página atual.
+- Iremos entender como funciona a criação de páginas dentro do React, como que a gente consegue criar diferentes páginas dentro do React.
+- Para criar diferentes o páginas no React é um pouco diferente também porque o React gera uma SPA, ou seja, a nossa aplicação só tem um html (index.html) para a aplicação inteira.
+- E como que funciona uma aplicação convencional sem o React, você tem um html para cada página. Então você tem um html para a página principal, ou para a página de tarefas.
+- Mas como estamos em uma SPA, a gente vai ter também as páginas gerenciadas/criadas por meio de JavaScript. Então a gente ainda vai ter apenas um html na nossa aplicação mesmo se a nossa aplicação tiver várias páginas.
+- E para fazer isso usaremos uma nova biblioteca chamada "React Router" que como o nome jã diz, ela gerencia rotas na nossa aplicação.
+  - Abrir o terminal e fazer o comando "npm install react-router-dom@6.26.1".
+  - Após instalado, abrir o arquivo "main.jsx" e adicionar o router conforme manda na documentação.
+  - Maiores detalhes consultar código do arquivo "main.jsx", "const router = createBrowserRouter([" e "<RouterProvider router={router} />"
+- Agora vamos adicionar uma nova página chamada "TaskPage".
+  - Clicar com o botáo direito sobre a pasta "src" e adicionar uma nova pasta chamada "pages" e adicionar um novo arquivo chamado "TaskPage.jsx"
+  - Criar uma function comum para retornar algo. Consultar arquivo "TaskPage.jsx"
+  - Ir até o arquivo "main.jsx" e adicionar uma nova rota chamada "/task" passando o novo componente TaskPage. Consultar arquivo Consultar arquivo "main.jsx"
+    - Observação: Esse novo arquivo será apenas uma nova página, mas ainda assim podemos chamá-lo de componente porque retorna um "jsx".
+  - Vamos começar a estilizar a nova página para manter o mesmo padrão da outra. Consultar arquivo "TaskPage.jsx"
+  ##### Acessando parâmetros da URL #####
+  - Agora vamos passar uma "queryParam" para a URL da nova página para saber qual task estamos falando.
+    - Iremos adicionar uma nova const e user "useSearchParams()", e mais duas const para passar title e a description. Assim a url irá capturar tanto o title quanto a description quando vier da página anterior.
+	##### Navegação entre páginas #####
+	- Agora iremos até o component "Tasks.jsx" (CTRL+P e digita Tasks e enter que ele abre direto o arquivo no VSCode), e lá vamos adicionar o "useNavigate" para navegar entre essa para a outra página passando o que for necessário.
+	- No arquivo "Tasks.jsx" foi necessário criar a nova função "onSeeDetailsClick" e um novo "onClick" no botão do "ChevronRightIcon". Foi necessário abrir uma arrow function para poder passar a task.
+	- Consultar arquivos "TaskPage.jsx" e "Tasks.jsx"
+  ##### Estilizando a página de detalhes da tarefa #####
+  - Agora vamos estilizar a nova página "TaskPage.jsx" adicionando formatação parecida com a página "App.jsx" (apenas estilização) e um botão de voltar para retornar a página anterior.
+
+	
+##### Salvando tarefas no "LocalStorage" #####  
+- Link Local Storage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+
+- Usaremos o hook do React "useEffect". Ele será usado no arquivo "App.jsx". Isso irá criar um efeito para quando uma Task for alterada, ou seja, sempre que o state da Task for alterado o useEffect irá capturar essa mudança e nesse momento podemos fazer algo, como por exemplo, salvar a mudança no localStorage.
+
+Old code to create tasks
+/*
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      title: "Study programming",
+      description: "Study programming to become a full stack developer.",
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      title: "Study English",
+      description: "Study English to become fluent.",
+      isCompleted: true,
+    },
+    {
+      id: 3,
+      title: "Study math",
+      description: "Study math to become a great teacher.",
+      isCompleted: false,
+    },
+  ]);
+  */
+
+
+##### Interagindo com APIs #####  
+- Link JSONPlaceholder API: https://jsonplaceholder.typicode.com/
+
+- Usaremos novamente um "useEffect" no arquivo "App.jsx" para chamar a API, mas dessa vez, o segundo parâmetro será vazio, o que significa que esse useEffect somente será executado uma única vez e quando o usuário acaba de acessar a aplicação.
+
+
+##### Revisando o código ##### 
+
+- Aqui iremos revisar o que fizemos até o momento no intuito de melhorar o código. Por exemplo, se houver trechos repetitivos para chamar de um só lugar, entre outros.
+- Criaremos o arquivo "src\components\Input.jsx" e iremos transformar o input em um componente, que será usado no arquivo "src\components\AddTask.jsx"
+- Criaremos o arquivo "src\components\Button.jsx" e iremos transformar o button em um componente, que será usado no arquivo "src\components\Tasks.jsx"
+- Criaremos o arquivo "src\components\Title.jsx" e iremos transformar o title em um componente, que será usado nos arquivos "src\pages\TaskPage.jsx" e "src\App.jsx"
+
+Notes: 
+- Ao usar "{...props}" no componente criado, significa que todas as props que forem passadas serão caputadas no componente.
+- Ao usar "{props.children}" no componente criado, signica que todas as informações dentro daquele componente que foram usadas serão passadas ao componente.
+
+
+##### Componentes de Classe #####
+Além dos componentes de funções que criamos anteriormente, também é possível criar componentes de classe, como também usar state neles. Porém, eles estão caindo em desuso por conta de ser mais complexo de trabalhar e também por não ser possível usar hooks dentro deles (por exemplo, não é possível usar useState() e useEffect() dentro dele).
+
+
+##### Deploy da Aplicação #####
+Executar no console o comando "npm run build"
+Será gerado a pasta "dist" e dentro dela será gerado o index.html e os assets (que inclue o arquivo JavaScript).
