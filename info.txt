@@ -347,4 +347,13 @@ Será gerado a pasta "dist" e dentro dela será gerado o index.html e os assets 
 O instrutor usou o Vercel para hospedar a app.
 - Link Vercel: https://vercel.com
 
-Logar no Vercel usando sua conta do GitHub, e se o código já estiver em um repositório do GitHub vamos usar ele para subir a aplicação.
+- Logar no Vercel usando sua conta do GitHub, e se o código já estiver em um repositório do GitHub vamos usar ele para subir a aplicação.
+- Após logar no Vercel com sua conta GitHub, importe seus repositorios (é importante que o repositório que você irá publicar seja público).
+- Clicar no seu ícone (canto superior direito) e Dashboard.
+- Clicar em Add New, selecionar Project.
+- Importe seu repositório (no meu caso foi o repositório "react" e dentro dele tem uma pasta chamada "curso-de-react" que contém o código da aplicação).
+- Coloque um nome para o projeto (coloquei "curso-de-react"), selecione o framework "Vite", e no Root Directory, selecione a pasta root que seu projeto está (no meu caso será a pasta "curso-de-react").
+- Clicar em Deploy.
+- Após esperar o Deploy, clicar em Continue to Dashboard, depois clicar no link abaixo de Deployment, e depois no link abaixo de Domains.
+- No meu caso gerou a URL "https://curso-de-react-wine.vercel.app/".
+
