@@ -343,3 +343,8 @@ Além dos componentes de funções que criamos anteriormente, também é possív
 ##### Deploy da Aplicação #####
 Executar no console o comando "npm run build"
 Será gerado a pasta "dist" e dentro dela será gerado o index.html e os assets (que inclue o arquivo JavaScript).
+
+O instrutor usou o Vercel para hospedar a app.
+- Link Vercel: https://vercel.com
+
+Logar no Vercel usando sua conta do GitHub, e se o código já estiver em um repositório do GitHub vamos usar ele para subir a aplicação.
