@@ -357,3 +357,5 @@ O instrutor usou o Vercel para hospedar a app.
 - Após esperar o Deploy, clicar em Continue to Dashboard, depois clicar no link abaixo de Deployment, e depois no link abaixo de Domains.
 - No meu caso gerou a URL "https://curso-de-react-wine.vercel.app/".
 
+Notes: 
+- Quando for preciso fazer alguma alteração, um novo deployment vai ser trigado para a Vercel fazer o novo deploy.
